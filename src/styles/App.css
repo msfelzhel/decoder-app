@@ -1,0 +1,396 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #D4A574;
+  --secondary: #E8D4C4;
+  --accent: #C9956C;
+  --dark: #4A3728;
+  --light: #F5F1ED;
+  --border: #E0D0C4;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+  background-color: white;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--accent);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: var(--dark);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.cipher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin: 60px 0;
+}
+
+.cipher-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.cipher-card:hover {
+  box-shadow: 0 8px 24px rgba(201, 149, 108, 0.15);
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.cipher-card h3 {
+  font-size: 20px;
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+.cipher-card p {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.learn-btn {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.learn-btn:hover {
+  color: var(--accent);
+}
+
+/* Cipher Tools */
+.cipher-tool {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  margin: 40px 0;
+  border: 1px solid var(--border);
+}
+
+.cipher-tool h2 {
+  color: var(--dark);
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+
+.cipher-description {
+  color: #888;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: rgba(212, 165, 116, 0.05);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--dark);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border);
+}
+
+.result {
+  background-color: var(--secondary);
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  padding: 15px;
+  margin-top: 20px;
+  display: none;
+}
+
+.result.show {
+  display: block;
+}
+
+.result-label {
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.result-text {
+  background: white;
+  padding: 12px;
+  border-radius: 4px;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+}
+
+/* About Section */
+.about-section {
+  padding: 60px 20px;
+}
+
+.about-section h2 {
+  font-size: 36px;
+  color: var(--dark);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.cipher-info {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 25px;
+  border-left: 4px solid var(--primary);
+}
+
+.cipher-info h3 {
+  color: var(--dark);
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.cipher-info p {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.cipher-info strong {
+  color: var(--accent);
+}
+
+/* Contacts */
+.contacts-section {
+  padding: 60px 20px;
+}
+
+.contacts-section h2 {
+  font-size: 36px;
+  color: var(--dark);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.contact-form {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+}
+
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+}
+
+.success-message {
+  background-color: #D4E8D4;
+  color: #2D5A2D;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  display: none;
+  text-align: center;
+}
+
+.success-message.show {
+  display: block;
+}
+
+/* Project Section */
+.project-section {
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.project-section h2 {
+  font-size: 36px;
+  color: var(--dark);
+  margin-bottom: 30px;
+}
+
+.project-section p {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+footer {
+  background-color: white;
+  border-top: 1px solid var(--border);
+  padding: 30px 20px;
+  text-align: center;
+  color: #888;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    gap: 15px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .cipher-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
