@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/decoder-pd/static/css/main.9d021106.css",
+    "main.js": "/decoder-pd/static/js/main.f360bbd4.js",
+    "index.html": "/decoder-pd/index.html",
+    "main.9d021106.css.map": "/decoder-pd/static/css/main.9d021106.css.map",
+    "main.f360bbd4.js.map": "/decoder-pd/static/js/main.f360bbd4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d021106.css",
+    "static/js/main.f360bbd4.js"
+  ]
+}
