@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/decoder-pd/static/css/main.9d021106.css",
-    "main.js": "/decoder-pd/static/js/main.f360bbd4.js",
-    "index.html": "/decoder-pd/index.html",
-    "main.9d021106.css.map": "/decoder-pd/static/css/main.9d021106.css.map",
-    "main.f360bbd4.js.map": "/decoder-pd/static/js/main.f360bbd4.js.map"
+    "main.css": "/decoder-app/static/css/main.9d021106.css",
+    "main.js": "/decoder-app/static/js/main.f360bbd4.js",
+    "index.html": "/decoder-app/index.html",
+    "main.9d021106.css.map": "/decoder-app/static/css/main.9d021106.css.map",
+    "main.f360bbd4.js.map": "/decoder-app/static/js/main.f360bbd4.js.map"
   },
   "entrypoints": [
     "static/css/main.9d021106.css",
