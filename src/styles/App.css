@@ -373,17 +373,51 @@ footer {
   margin-top: 60px;
 }
 
+/* Мобильная адаптация */
 @media (max-width: 768px) {
   nav ul {
-    gap: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    font-size: 14px;
+    padding: 5px 8px;
   }
 
   .hero h1 {
-    font-size: 32px;
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    padding: 0 10px;
   }
 
   .cipher-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 30px 0;
+  }
+
+  .cipher-card {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .cipher-tool {
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .cipher-tool h2 {
+    font-size: 24px;
+  }
+
+  .two-column-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
 
   .button-group {
@@ -392,5 +426,117 @@ footer {
 
   button {
     width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .result-text {
+    font-size: 14px;
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .contact-form {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .cipher-navigation {
+    grid-template-columns: 1fr !important;
+  }
+
+  .cipher-navigation button {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  nav ul {
+    gap: 8px;
+  }
+
+  nav a {
+    font-size: 13px;
+  }
+
+  .hero {
+    padding: 40px 10px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .cipher-card h3 {
+    font-size: 18px;
+  }
+
+  .about-section,
+  .contacts-section,
+  .project-section {
+    padding: 30px 10px;
+  }
+
+  .cipher-info {
+    padding: 20px;
+    margin: 0 10px 20px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  nav a {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+}
+
+/* Утилитарные классы */
+.text-center {
+  text-align: center;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.hidden-mobile {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
   }
 }

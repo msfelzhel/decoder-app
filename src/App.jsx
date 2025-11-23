@@ -8,6 +8,7 @@ import CaesarCipher from './components/CaesarCipher';
 import AtbashCipher from './components/AtbashCipher';
 import DancingMenCipher from './components/DancingMenCipher';
 import MorseCipher from './components/MorseCipher';
+import './styles/App.css';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
