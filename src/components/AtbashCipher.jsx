@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { atbashTransform } from '../utils/ciphers';
+import { atbashTransform, saveHistory } from '../utils/ciphers';
 
 const AtbashCipher = ({ onBack }) => {
   const [input, setInput] = useState('');
@@ -11,6 +11,7 @@ const AtbashCipher = ({ onBack }) => {
     const transformed = atbashTransform(input);
     setResult(transformed);
     setShowResult(true);
+    saveHistory("Атбаш", input, transformed);
   };
 
   const handleClear = () => {
@@ -52,7 +53,7 @@ const AtbashCipher = ({ onBack }) => {
 
         <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
           <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>Попробуй сам</h3>
-          
+
           <div className="form-group">
             <label style={{ fontWeight: '600', color: 'var(--dark)', marginBottom: '8px', display: 'block' }}>
               Режим
@@ -94,6 +95,12 @@ const AtbashCipher = ({ onBack }) => {
             </button>
             <button className="btn-secondary" onClick={handleClear} style={{ flex: '1' }}>
               Очистить
+            </button>
+            <button
+              className="btn-secondary"
+              onClick={() => navigator.clipboard.writeText(result)}
+            >
+              Скопировать
             </button>
           </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { morseEncode, morseDecode } from '../utils/ciphers';
+import { morseEncode, morseDecode, saveHistory } from '../utils/ciphers';
 
 const MorseCipher = ({ onBack }) => {
   const [input, setInput] = useState('');
@@ -16,6 +16,7 @@ const MorseCipher = ({ onBack }) => {
     }
     setResult(transformed);
     setShowResult(true);
+    saveHistory("Азбука Морзе", input, transformed);
   };
 
   const handleClear = () => {
@@ -58,7 +59,7 @@ const MorseCipher = ({ onBack }) => {
 
         <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
           <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>Попробуй сам</h3>
-          
+
           <div className="form-group">
             <label style={{ fontWeight: '600', color: 'var(--dark)', marginBottom: '8px', display: 'block' }}>
               Режим
@@ -100,6 +101,12 @@ const MorseCipher = ({ onBack }) => {
             </button>
             <button className="btn-secondary" onClick={handleClear} style={{ flex: '1' }}>
               Очистить
+            </button>
+            <button
+              className="btn-secondary"
+              onClick={() => navigator.clipboard.writeText(result)}
+            >
+              Скопировать
             </button>
           </div>
 

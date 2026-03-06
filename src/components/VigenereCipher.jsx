@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { caesarEncrypt, caesarDecrypt, saveHistory } from '../utils/ciphers';
+import { vigenereEncrypt, vigenereDecrypt, saveHistory } from '../utils/ciphers';
 
-const CaesarCipher = ({ onBack }) => {
+const VigenereCipher = ({ onBack }) => {
 
   const [input, setInput] = useState('');
-  const [shift, setShift] = useState(3);
+  const [key, setKey] = useState('');
   const [result, setResult] = useState('');
   const [showResult, setShowResult] = useState(false);
   const [mode, setMode] = useState('encrypt');
@@ -14,23 +14,41 @@ const CaesarCipher = ({ onBack }) => {
     let transformed;
 
     if (mode === 'encrypt') {
-      transformed = caesarEncrypt(input, shift);
+      transformed = vigenereEncrypt(input, key);
     } else {
-      transformed = caesarDecrypt(input, shift);
+      transformed = vigenereDecrypt(input, key);
     }
 
     setResult(transformed);
     setShowResult(true);
 
-    // 🔥 СОХРАНЯЕМ В ИСТОРИЮ
-    saveHistory("Шифр Цезаря", input, transformed);
+    saveHistory("Виженер", input, transformed);
 
   };
 
   const handleClear = () => {
     setInput('');
+    setKey('');
     setResult('');
     setShowResult(false);
+  };
+
+  // 🔑 генератор ключа
+  const generateRandomKey = () => {
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let randomKey = "";
+
+    for (let i = 0; i < 6; i++) {
+      randomKey += letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    setKey(randomKey);
+
+  };
+
+  const copyResult = () => {
+    navigator.clipboard.writeText(result);
   };
 
   return (
@@ -38,11 +56,11 @@ const CaesarCipher = ({ onBack }) => {
 
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <h2 style={{ fontSize: '32px', color: 'var(--dark)', marginBottom: '10px' }}>
-          Шифр Цезаря
+          Шифр Виженера
         </h2>
 
         <p style={{ color: '#888', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
-          Простой и классический способ отправки секретных сообщений путём сдвига каждой буквы на определённое количество мест в алфавите.
+          Классический полиалфавитный шифр, использующий ключевое слово.
         </p>
       </div>
 
@@ -54,48 +72,24 @@ const CaesarCipher = ({ onBack }) => {
         {/* Левая колонка */}
         <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
 
-          <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>
+          <h3 style={{ marginBottom: '15px' }}>
             Как это работает
           </h3>
 
-          <p style={{ color: '#666', marginBottom: '12px', fontSize: '14px' }}>
-            Шифр Цезаря заменяет буквы в алфавитном порядке, чтобы скрыть сообщение.
+          <p style={{ color: '#666', marginBottom: '12px' }}>
+            Шифр Виженера использует ключевое слово для последовательного сдвига букв сообщения.
           </p>
 
-          <div
-            style={{
-              background: 'var(--dark)',
-              color: 'white',
-              padding: '15px',
-              borderRadius: '8px',
-              fontFamily: 'monospace',
-              fontSize: '12px',
-              textAlign: 'center'
-            }}
-          >
-            <div>PLAINTEXT</div>
-            <div>А Б В Г Д Е Ё Ж</div>
-            <div>↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓</div>
-            <div>Г Д Е Ё Ж З И Й</div>
-            <div>CIPHERTEXT (сдвиг +3)</div>
-          </div>
-
-          <p style={{ color: '#666', marginTop: '15px', fontSize: '13px' }}>
-            <strong>Пример:</strong><br />
-            Исходный текст: ПРИВЕТ<br />
-            Ключ (сдвиг): 3<br />
-            Зашифровано: ТУЛЕИХ
+          <p style={{ color: '#666', fontSize: '13px' }}>
+            <strong>Пример:</strong><br/>
+            Исходный текст: ПРИВЕТ<br/>
+            Ключ: КЛЮЧ
           </p>
 
         </div>
 
-
         {/* Правая колонка */}
         <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
-
-          <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>
-            Попробуй сам
-          </h3>
 
           <div className="form-group">
 
@@ -125,9 +119,7 @@ const CaesarCipher = ({ onBack }) => {
 
           <div className="form-group">
 
-            <label>
-              {mode === 'encrypt' ? 'Исходное сообщение' : 'Зашифрованное сообщение'}
-            </label>
+            <label>Сообщение</label>
 
             <textarea
               placeholder="Введите сообщение..."
@@ -139,39 +131,38 @@ const CaesarCipher = ({ onBack }) => {
 
           <div className="form-group">
 
-            <label>Секретный ключ (сдвиг)</label>
+            <label>Ключ</label>
 
             <input
-              type="number"
-              min="1"
-              max="32"
-              value={shift}
-              onChange={(e) => setShift(parseInt(e.target.value) || 3)}
+              type="text"
+              placeholder="Введите ключ"
+              value={key}
+              onChange={(e) => setKey(e.target.value)}
             />
 
           </div>
 
-          <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
+          <div style={{ display: 'flex', gap: '15px', marginTop: '20px', flexWrap: "wrap" }}>
 
-            <button className="btn-primary" onClick={handleTransform} style={{ flex: 1 }}>
+            <button className="btn-primary" onClick={handleTransform}>
               {mode === 'encrypt' ? 'Зашифровать' : 'Расшифровать'}
             </button>
 
-            <button className="btn-secondary" onClick={handleClear} style={{ flex: 1 }}>
+            <button className="btn-secondary" onClick={handleClear}>
               Очистить
             </button>
 
-            <button
-              className="btn-secondary"
-              onClick={() => navigator.clipboard.writeText(result)}
-            >
+            <button className="btn-secondary" onClick={copyResult}>
               Скопировать
+            </button>
+
+            <button className="btn-secondary" onClick={generateRandomKey}>
+              Случайный ключ
             </button>
 
           </div>
 
           {showResult && (
-
             <div className="result show">
 
               <div className="result-label">
@@ -183,13 +174,11 @@ const CaesarCipher = ({ onBack }) => {
               </div>
 
             </div>
-
           )}
 
         </div>
 
       </div>
-
 
       <button
         className="btn-secondary"
@@ -204,4 +193,4 @@ const CaesarCipher = ({ onBack }) => {
 
 };
 
-export default CaesarCipher;
+export default VigenereCipher;

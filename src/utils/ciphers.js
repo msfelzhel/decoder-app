@@ -147,3 +147,208 @@ export const morseDecode = (morseCode) => {
 
   return result.trim();
 };
+// =====================
+// Шифр Виженера
+// =====================
+
+export const vigenereEncrypt = (text, key) => {
+  if (!key) return text;
+
+  const alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+  const upperText = text.toUpperCase();
+  const upperKey = key.toUpperCase();
+
+  let result = '';
+  let keyIndex = 0;
+
+  for (let char of upperText) {
+    const textIndex = alphabet.indexOf(char);
+
+    if (textIndex === -1) {
+      result += char;
+      continue;
+    }
+
+    const keyChar = upperKey[keyIndex % upperKey.length];
+    const keyIndexAlphabet = alphabet.indexOf(keyChar);
+
+    const newIndex = (textIndex + keyIndexAlphabet) % alphabet.length;
+
+    result += alphabet[newIndex];
+    keyIndex++;
+  }
+
+  return result;
+};
+
+export const vigenereDecrypt = (text, key) => {
+  if (!key) return text;
+
+  const alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+  const upperText = text.toUpperCase();
+  const upperKey = key.toUpperCase();
+
+  let result = '';
+  let keyIndex = 0;
+
+  for (let char of upperText) {
+    const textIndex = alphabet.indexOf(char);
+
+    if (textIndex === -1) {
+      result += char;
+      continue;
+    }
+
+    const keyChar = upperKey[keyIndex % upperKey.length];
+    const keyIndexAlphabet = alphabet.indexOf(keyChar);
+
+    const newIndex =
+      (textIndex - keyIndexAlphabet + alphabet.length) % alphabet.length;
+
+    result += alphabet[newIndex];
+    keyIndex++;
+  }
+
+  return result;
+};
+
+
+
+// =====================
+// Шифр Вернама
+// =====================
+
+export const vernamCipher = (text, key) => {
+  if (!key) return text;
+
+  let result = '';
+
+  for (let i = 0; i < text.length; i++) {
+    const textCode = text.charCodeAt(i);
+    const keyCode = key.charCodeAt(i % key.length);
+
+    result += String.fromCharCode(textCode ^ keyCode);
+  }
+
+  return result;
+};
+export const saveHistory = (type, input, result) => {
+
+  const history = JSON.parse(localStorage.getItem("cipherHistory")) || [];
+
+  history.push({
+    type,
+    input,
+    result
+  });
+
+  if (history.length > 20) {
+    history.shift();
+  }
+
+  localStorage.setItem("cipherHistory", JSON.stringify(history));
+
+};
+// =====================
+// Rail Fence Cipher
+// =====================
+
+export const railFenceEncrypt = (text, rails = 3) => {
+
+  if (!text) return "";
+
+  let fence = Array.from({ length: rails }, () => []);
+  let rail = 0;
+  let direction = 1;
+
+  for (let char of text) {
+    fence[rail].push(char);
+    rail += direction;
+
+    if (rail === 0 || rail === rails - 1) {
+      direction *= -1;
+    }
+  }
+
+  return fence.flat().join("");
+
+};
+
+export const railFenceDecrypt = (cipher, rails = 3) => {
+
+  let fence = Array.from({ length: rails }, () => Array(cipher.length).fill(null));
+
+  let rail = 0;
+  let direction = 1;
+
+  for (let i = 0; i < cipher.length; i++) {
+    fence[rail][i] = "*";
+    rail += direction;
+
+    if (rail === 0 || rail === rails - 1) {
+      direction *= -1;
+    }
+  }
+
+  let index = 0;
+
+  for (let r = 0; r < rails; r++) {
+    for (let c = 0; c < cipher.length; c++) {
+      if (fence[r][c] === "*" && index < cipher.length) {
+        fence[r][c] = cipher[index++];
+      }
+    }
+  }
+
+  let result = "";
+  rail = 0;
+  direction = 1;
+
+  for (let i = 0; i < cipher.length; i++) {
+    result += fence[rail][i];
+    rail += direction;
+
+    if (rail === 0 || rail === rails - 1) {
+      direction *= -1;
+    }
+  }
+
+  return result;
+
+};
+
+
+// =====================
+// Polybius Cipher
+// =====================
+
+const polybiusSquare = {
+  А: "11", Б: "12", В: "13", Г: "14", Д: "15",
+  Е: "21", Ж: "22", З: "23", И: "24", К: "25",
+  Л: "31", М: "32", Н: "33", О: "34", П: "35",
+  Р: "41", С: "42", Т: "43", У: "44", Ф: "45",
+  Х: "51", Ц: "52", Ч: "53", Ш: "54", Щ: "55"
+};
+
+export const polybiusEncrypt = (text) => {
+
+  return text
+    .toUpperCase()
+    .split("")
+    .map(char => polybiusSquare[char] || char)
+    .join(" ");
+
+};
+
+export const polybiusDecrypt = (cipher) => {
+
+  const reverse = Object.fromEntries(
+    Object.entries(polybiusSquare).map(([k, v]) => [v, k])
+  );
+
+  return cipher
+    .split(" ")
+    .map(code => reverse[code] || code)
+    .join("");
+
+};

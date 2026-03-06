@@ -8,6 +8,12 @@ import CaesarCipher from './components/CaesarCipher';
 import AtbashCipher from './components/AtbashCipher';
 import DancingMenCipher from './components/DancingMenCipher';
 import MorseCipher from './components/MorseCipher';
+import VigenereCipher from './components/VigenereCipher';
+import VernamCipher from './components/VernamCipher';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import RailFenceCipher from './components/RailFenceCipher';
+import PolybiusCipher from './components/PolybiusCipher';
 import './styles/App.css';
 
 function App() {
@@ -31,6 +37,18 @@ function App() {
         return <DancingMenCipher onBack={setCurrentPage} />;
       case 'morse':
         return <MorseCipher onBack={setCurrentPage} />;
+      case 'vigenere':
+        return <VigenereCipher onBack={setCurrentPage} />;
+      case 'vernam':
+        return <VernamCipher onBack={setCurrentPage} />;
+      case 'login':
+        return <Login onLogin={() => setCurrentPage('home')} onBack={setCurrentPage} />;
+      case 'register':
+        return <Register onBack={setCurrentPage} />;
+      case 'rail':
+        return <RailFenceCipher onBack={setCurrentPage} />;
+      case 'polybius':
+        return <PolybiusCipher onBack={setCurrentPage} />;
       default:
         return <Home onCipherSelect={setCurrentPage} />;
     }

@@ -11,12 +11,14 @@ const Header = ({ currentPage, onPageChange }) => {
   return (
     <header>
       <div className="header-container">
+
         <div className="logo">🔐 Дешифратор</div>
+
         <nav>
           <ul>
             {navItems.map(item => (
               <li key={item.id}>
-                <a 
+                <a
                   className={currentPage === item.id ? 'nav-link active' : 'nav-link'}
                   onClick={() => onPageChange(item.id)}
                 >
@@ -26,6 +28,16 @@ const Header = ({ currentPage, onPageChange }) => {
             ))}
           </ul>
         </nav>
+
+        <button
+          className="btn-primary"
+          onClick={() => onPageChange('login')}
+          style={{ padding: '8px 20px' }}
+        >
+          Войти
+        </button>
+        
+
       </div>
     </header>
   );

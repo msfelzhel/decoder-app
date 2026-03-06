@@ -181,6 +181,7 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="password"],
 textarea,
 select {
   width: 100%;
@@ -194,6 +195,7 @@ select {
 
 input[type="text"]:focus,
 input[type="number"]:focus,
+input[type="password"]:focus,
 textarea:focus,
 select:focus {
   outline: none;
