@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/decoder-app/static/css/main.a44d9deb.css",
-    "main.js": "/decoder-app/static/js/main.a04eb9e8.js",
+    "main.css": "/decoder-app/static/css/main.c5966b65.css",
+    "main.js": "/decoder-app/static/js/main.f5fde7fb.js",
     "index.html": "/decoder-app/index.html",
-    "main.a44d9deb.css.map": "/decoder-app/static/css/main.a44d9deb.css.map",
-    "main.a04eb9e8.js.map": "/decoder-app/static/js/main.a04eb9e8.js.map"
+    "main.c5966b65.css.map": "/decoder-app/static/css/main.c5966b65.css.map",
+    "main.f5fde7fb.js.map": "/decoder-app/static/js/main.f5fde7fb.js.map"
   },
   "entrypoints": [
-    "static/css/main.a44d9deb.css",
-    "static/js/main.a04eb9e8.js"
+    "static/css/main.c5966b65.css",
+    "static/js/main.f5fde7fb.js"
   ]
 }
