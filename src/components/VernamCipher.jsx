@@ -7,12 +7,17 @@ const VernamCipher = ({ onBack }) => {
   const [key, setKey] = useState('');
   const [result, setResult] = useState('');
   const [showResult, setShowResult] = useState(false);
+  const [mode, setMode] = useState('encrypt');
 
   const handleTransform = () => {
+
     const transformed = vernamCipher(input, key);
+
     setResult(transformed);
     setShowResult(true);
+
     saveHistory("Вернам", input, transformed);
+
   };
 
   const handleClear = () => {
@@ -25,7 +30,7 @@ const VernamCipher = ({ onBack }) => {
   // 🔑 генерация случайного ключа
   const generateRandomKey = () => {
 
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const letters = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     let randomKey = "";
 
     for (let i = 0; i < 6; i++) {
@@ -41,11 +46,12 @@ const VernamCipher = ({ onBack }) => {
   };
 
   return (
+
     <div style={{ padding: '40px 0' }}>
 
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <h2 style={{ fontSize: '32px', color: 'var(--dark)', marginBottom: '10px' }}>
-          Шифр Вернама
+          🔐 Шифр Вернама
         </h2>
 
         <p style={{ color: '#888', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
@@ -58,7 +64,6 @@ const VernamCipher = ({ onBack }) => {
         style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '40px' }}
       >
 
-        {/* Левая колонка */}
         <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
 
           <h3 style={{ marginBottom: '15px' }}>Как это работает</h3>
@@ -79,71 +84,81 @@ const VernamCipher = ({ onBack }) => {
               textAlign: 'center'
             }}
           >
-            Текст: 10101010 <br/>
-            Ключ: 11001100 <br/>
+            Текст: 10101010  <br/>
+            Ключ: 11001100  <br/>
             XOR: 01100110
           </div>
 
         </div>
 
-        {/* Правая колонка */}
         <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
 
-          <h3 style={{ marginBottom: '15px' }}>Попробуй сам</h3>
+          <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>
+            Попробуй сам
+          </h3>
 
           <div className="form-group">
-            <label>Сообщение</label>
+            <label style={{ fontWeight: '600', color: 'var(--dark)', marginBottom: '8px', display: 'block' }}>
+              Режим
+            </label>
+            <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
+              <button
+                className={mode === 'encrypt' ? 'btn-primary' : 'btn-secondary'}
+                onClick={() => setMode('encrypt')}
+                style={{ flex: 1, padding: '10px' }}
+              >
+                Шифрование
+              </button>
+              <button
+                className={mode === 'decrypt' ? 'btn-primary' : 'btn-secondary'}
+                onClick={() => setMode('decrypt')}
+                style={{ flex: 1, padding: '10px' }}
+              >
+                Дешифрование
+              </button>
+            </div>
+          </div>
 
+          <div className="form-group">
+            <label htmlFor="vernam-input" style={{ fontWeight: '600', color: 'var(--dark)', marginBottom: '8px', display: 'block' }}>
+              {mode === 'encrypt' ? 'Исходное сообщение' : 'Зашифрованное сообщение'}
+            </label>
             <textarea
-              placeholder="Введите сообщение..."
+              id="vernam-input"
+              placeholder={mode === 'encrypt' ? "Введите ваше секретное сообщение здесь..." : "Введите зашифрованное сообщение здесь..."}
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              style={{ width: '100%', padding: '12px', border: '1px solid var(--border)', borderRadius: '6px', fontFamily: 'inherit', fontSize: '14px', minHeight: '80px', resize: 'vertical' }}
             />
-
           </div>
 
           <div className="form-group">
-            <label>Ключ</label>
-
+            <label htmlFor="vernam-key" style={{ fontWeight: '600', color: 'var(--dark)', marginBottom: '8px', display: 'block' }}>
+              🔑 Ключ
+            </label>
             <input
               type="text"
-              placeholder="Введите ключ"
+              id="vernam-key"
+              placeholder="Например: СЕКРЕТ"
               value={key}
               onChange={(e) => setKey(e.target.value)}
+              style={{ width: '100%', padding: '12px', border: '1px solid var(--border)', borderRadius: '6px', fontFamily: 'inherit', fontSize: '14px' }}
             />
-
           </div>
 
-          <div className="button-group">
-
-            <button
-              className="btn-primary"
-              onClick={handleTransform}
-            >
-              Преобразовать
+          <div style={{ display: 'flex', gap: '15px', marginTop: '20px', flexWrap: 'wrap' }}>
+            <button className="btn-primary" onClick={handleTransform} style={{ flex: '1' }}>
+              {mode === 'encrypt' ? 'Зашифровать' : 'Расшифровать'}
             </button>
-
-            <button
-              className="btn-secondary"
-              onClick={handleClear}
-            >
+            <button className="btn-secondary" onClick={handleClear} style={{ flex: '1' }}>
               Очистить
             </button>
-
-            <button
-              className="btn-secondary"
-              onClick={copyResult}
-            >
+            <button className="btn-secondary" onClick={copyResult}>
               Скопировать
             </button>
-
-            <button
-              className="btn-secondary"
-              onClick={generateRandomKey}
-            >
+            <button className="btn-secondary" onClick={generateRandomKey}>
               Случайный ключ
             </button>
-
           </div>
 
           {showResult && (
@@ -157,38 +172,19 @@ const VernamCipher = ({ onBack }) => {
 
       </div>
 
-      <div
-        style={{
-          background: '#FFC107',
-          borderRadius: '12px',
-          padding: '20px',
-          marginBottom: '30px'
-        }}
-      >
-
-        <strong style={{ color: 'var(--dark)' }}>
-          Попробуй другие шифры
-        </strong>
-
-        <div
-          className="cipher-navigation"
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px', marginTop: '15px' }}
-        >
-
-          <button onClick={() => onBack('caesar')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px' }}>
+      <div style={{ background: '#FFC107', borderRadius: '12px', padding: '20px', marginBottom: '30px' }}>
+        <strong style={{ color: 'var(--dark)' }}>Попробуй другие шифры</strong>
+        <div className="cipher-navigation" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px', marginTop: '15px' }}>
+          <button onClick={() => onBack('caesar')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
             Шифр Цезаря
           </button>
-
-          <button onClick={() => onBack('atbash')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px' }}>
-            Шифр Атбаш
+          <button onClick={() => onBack('vigenere')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Шифр Виженера
           </button>
-
-          <button onClick={() => onBack('morse')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px' }}>
-            Азбука Морзе
+          <button onClick={() => onBack('polybius')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Шифр Полибия
           </button>
-
         </div>
-
       </div>
 
       <button
@@ -200,6 +196,7 @@ const VernamCipher = ({ onBack }) => {
       </button>
 
     </div>
+
   );
 
 };

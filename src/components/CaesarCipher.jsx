@@ -22,7 +22,6 @@ const CaesarCipher = ({ onBack }) => {
     setResult(transformed);
     setShowResult(true);
 
-    // 🔥 СОХРАНЯЕМ В ИСТОРИЮ
     saveHistory("Шифр Цезаря", input, transformed);
 
   };
@@ -34,6 +33,7 @@ const CaesarCipher = ({ onBack }) => {
   };
 
   return (
+
     <div style={{ padding: '40px 0' }}>
 
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -81,9 +81,9 @@ const CaesarCipher = ({ onBack }) => {
           </div>
 
           <p style={{ color: '#666', marginTop: '15px', fontSize: '13px' }}>
-            <strong>Пример:</strong><br />
-            Исходный текст: ПРИВЕТ<br />
-            Ключ (сдвиг): 3<br />
+            <strong>Пример:</strong><br/>
+            Исходный текст: ПРИВЕТ<br/>
+            Ключ (сдвиг): 3<br/>
             Зашифровано: ТУЛЕИХ
           </p>
 
@@ -191,6 +191,22 @@ const CaesarCipher = ({ onBack }) => {
       </div>
 
 
+      {/* Попробуй другие шифры */}
+      <div style={{ background: '#FFC107', borderRadius: '12px', padding: '20px', marginBottom: '30px' }}>
+        <strong style={{ color: 'var(--dark)' }}>Попробуй другие шифры</strong>
+        <div className="cipher-navigation" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px', marginTop: '15px' }}>
+          <button onClick={() => onBack('atbash')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Шифр Атбаш
+          </button>
+          <button onClick={() => onBack('dancing')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Пляшущие человечки
+          </button>
+          <button onClick={() => onBack('morse')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Азбука Морзе
+          </button>
+        </div>
+      </div>
+
       <button
         className="btn-secondary"
         onClick={() => onBack('home')}
@@ -200,6 +216,7 @@ const CaesarCipher = ({ onBack }) => {
       </button>
 
     </div>
+
   );
 
 };
