@@ -128,7 +128,7 @@ nav a.active {
 }
 
 .cipher-card {
-  background: white;
+  background: #fcfeff;
   border: 2px solid var(--border);
   border-radius: 16px;
   padding: 32px 24px;
@@ -366,7 +366,7 @@ button {
 }
 
 .cipher-info {
-  background: white;
+  background: #fcfeff;
   border-radius: 20px;
   padding: 32px;
   margin-bottom: 24px;
