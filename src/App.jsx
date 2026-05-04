@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Home from './pages/Home';
 import AboutCiphers from './pages/AboutCiphers';
+import Tasks from './pages/Tasks';
 import Contacts from './pages/Contacts';
 import AboutProject from './pages/AboutProject';
 import CaesarCipher from './components/CaesarCipher';
@@ -30,6 +31,8 @@ function App() {
         return <Home onCipherSelect={setCurrentPage} />;
       case 'ciphers':
         return <AboutCiphers onCipherSelect={setCurrentPage} />;
+      case 'tasks':
+        return <Tasks />;
       case 'contacts':
         return <Contacts />;
       case 'about':
@@ -66,7 +69,7 @@ function App() {
         {renderPage()}
       </main>
       <footer>
-        <p>&copy; 2025 Дешифратор для школьников. Все права защищены.</p>
+        <p>&copy; 2026 Дешифратор для школьников. Все права защищены.</p>
       </footer>
     </div>
   );

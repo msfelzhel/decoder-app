@@ -1,18 +1,24 @@
 import React from 'react';
 
 const Header = ({ currentPage, onPageChange }) => {
+
   const navItems = [
     { id: 'home', label: 'Главная' },
     { id: 'ciphers', label: 'О шифрах' },
+    { id: 'tasks', label: 'Задания' },  // ← Добавить эту строку
     { id: 'contacts', label: 'Контакты' },
     { id: 'about', label: 'О проекте' }
   ];
 
   return (
+
     <header>
+
       <div className="header-container">
 
-        <div className="logo">🔐 Дешифратор</div>
+        <div className="logo">
+          🔐 Дешифратор
+        </div>
 
         <nav>
           <ul>
@@ -36,11 +42,13 @@ const Header = ({ currentPage, onPageChange }) => {
         >
           Войти
         </button>
-        
 
       </div>
+
     </header>
+
   );
+
 };
 
 export default Header;
