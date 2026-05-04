@@ -12,7 +12,6 @@ const ContactForm = () => {
       setName('');
       setEmail('');
       setMessage('');
-
       setTimeout(() => {
         setShowSuccess(false);
       }, 3000);
@@ -24,38 +23,38 @@ const ContactForm = () => {
   return (
     <div className="contacts-section">
       <h2>Контакты</h2>
-
+      
       <div className="contact-form">
         {showSuccess && (
           <div className="success-message show">
-            Спасибо! Ваше сообщение отправлено.
+            ✓ Спасибо! Ваше сообщение отправлено.
           </div>
         )}
 
         <div className="form-group">
-          <label htmlFor="name">Ваше имя:</label>
+          <label htmlFor="name">Ваше имя</label>
           <input
             type="text"
             id="name"
-            placeholder="Введите ваше имя"
+            placeholder="Иван Петров"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            placeholder="Введите ваш email"
+            placeholder="example@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="message">Сообщение:</label>
+          <label htmlFor="message">Сообщение</label>
           <textarea
             id="message"
             placeholder="Введите ваше сообщение..."
@@ -64,8 +63,18 @@ const ContactForm = () => {
           />
         </div>
 
-        <button className="btn-primary" onClick={sendMessage} style={{ width: '100%' }}>
-          Отправить
+        <button 
+          className="btn-primary" 
+          onClick={sendMessage}
+          style={{ 
+            width: '100%', 
+            marginTop: '8px',
+            padding: '14px 24px',
+            fontSize: '15px',
+            fontWeight: '600'
+          }}
+        >
+          Отправить сообщение
         </button>
       </div>
     </div>
