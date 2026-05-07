@@ -70,7 +70,7 @@ const VigenereCipher = ({ onBack }) => {
         style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '40px' }}
       >
 
-        <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
+        <div style={{ background: '#fcfeff', borderRadius: '12px', padding: '25px', border: '3px solid var(--border)' }}>
 
           <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>
             Как это работает
@@ -100,7 +100,7 @@ const VigenereCipher = ({ onBack }) => {
 
         </div>
 
-        <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
+        <div style={{ background: '#fcfeff', borderRadius: '12px', padding: '25px', border: '3px solid var(--border)' }}>
 
           <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>
             Попробуй сам
@@ -181,20 +181,31 @@ const VigenereCipher = ({ onBack }) => {
 
       </div>
 
-      <div style={{ background: '#FFC107', borderRadius: '12px', padding: '20px', marginBottom: '30px' }}>
-        <strong style={{ color: 'var(--dark)' }}>Попробуй другие шифры</strong>
-        <div className="cipher-navigation" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px', marginTop: '15px' }}>
-          <button onClick={() => onBack('caesar')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
-            Шифр Цезаря
-          </button>
-          <button onClick={() => onBack('vernam')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
-            Шифр Вернама
-          </button>
-          <button onClick={() => onBack('polybius')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
-            Шифр Полибия
-          </button>
-        </div>
-      </div>
+{/* Попробуй другие шифры */}
+<div style={{ maxWidth: '800px', margin: '0 auto' }}>
+  <div 
+    className="cipher-info"
+    style={{ 
+      marginBottom: '30px',
+      padding: '10px 24px',
+      textAlign: 'center'
+    }}
+  >
+    <h3 style={{ 
+      color: 'var(--dark)', 
+      marginBottom: '16px',
+      fontSize: '18px',
+      fontWeight: '600'
+    }}>
+      ⚡ Попробуй другие шифры
+    </h3>
+    <div className="cipher-navigation">
+      <button onClick={() => onBack('caesar')}>Шифр Цезаря</button>
+      <button onClick={() => onBack('vernam')}>Шифр Вернама</button>
+      <button onClick={() => onBack('polybius')}>Шифр Полибия</button>
+    </div>
+  </div>
+</div>
 
       <button
         className="btn-secondary"

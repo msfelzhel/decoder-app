@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const CipherCard = ({ title, description, onClick }) => {
+const CipherCard = memo(({ title, description, onClick }) => {
   return (
     <div className="cipher-card" onClick={onClick}>
       <h3>{title}</h3>
@@ -8,6 +8,6 @@ const CipherCard = ({ title, description, onClick }) => {
       <a className="learn-btn">Узнать больше →</a>
     </div>
   );
-};
+});
 
 export default CipherCard;

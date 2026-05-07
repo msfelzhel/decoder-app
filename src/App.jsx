@@ -1,20 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Header from './components/Header';
-import Home from './pages/Home';
-import AboutCiphers from './pages/AboutCiphers';
-import Contacts from './pages/Contacts';
-import AboutProject from './pages/AboutProject';
-import CaesarCipher from './components/CaesarCipher';
-import AtbashCipher from './components/AtbashCipher';
-import DancingMenCipher from './components/DancingMenCipher';
-import MorseCipher from './components/MorseCipher';
-import VigenereCipher from './components/VigenereCipher';
-import VernamCipher from './components/VernamCipher';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import RailFenceCipher from './components/RailFenceCipher';
-import PolybiusCipher from './components/PolybiusCipher';
 import './styles/App.css';
+
+// Ленивая загрузка страниц
+const Home = lazy(() => import('./pages/Home'));
+const AboutCiphers = lazy(() => import('./pages/AboutCiphers'));
+const Tasks = lazy(() => import('./pages/Tasks'));
+const Contacts = lazy(() => import('./pages/Contacts'));
+const AboutProject = lazy(() => import('./pages/AboutProject'));
+const Login = lazy(() => import('./pages/Login'));
+const Register = lazy(() => import('./pages/Register'));
+
+// Ленивая загрузка компонентов шифров
+const CaesarCipher = lazy(() => import('./components/CaesarCipher'));
+const AtbashCipher = lazy(() => import('./components/AtbashCipher'));
+const DancingMenCipher = lazy(() => import('./components/DancingMenCipher'));
+const MorseCipher = lazy(() => import('./components/MorseCipher'));
+const VigenereCipher = lazy(() => import('./components/VigenereCipher'));
+const VernamCipher = lazy(() => import('./components/VernamCipher'));
+const RailFenceCipher = lazy(() => import('./components/RailFenceCipher'));
+const PolybiusCipher = lazy(() => import('./components/PolybiusCipher'));
+
+// Компонент загрузки (спиннер)
+const LoadingSpinner = () => (
+  <div style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    minHeight: '400px',
+    flexDirection: 'column',
+    gap: '20px'
+  }}>
+    <div style={{ 
+      width: '50px', 
+      height: '50px', 
+      border: '4px solid var(--border)',
+      borderTop: '4px solid var(--primary)',
+      borderRadius: '50%',
+      animation: 'spin 1s linear infinite'
+    }} />
+    <p style={{ color: 'var(--gray)', fontSize: '16px' }}>Загрузка...</p>
+    <style>{`
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `}</style>
+  </div>
+);
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -30,6 +63,8 @@ function App() {
         return <Home onCipherSelect={setCurrentPage} />;
       case 'ciphers':
         return <AboutCiphers onCipherSelect={setCurrentPage} />;
+      case 'tasks':
+        return <Tasks />;
       case 'contacts':
         return <Contacts />;
       case 'about':
@@ -63,10 +98,12 @@ function App() {
     <div className="App">
       <Header currentPage={currentPage} onPageChange={setCurrentPage} />
       <main>
-        {renderPage()}
+        <Suspense fallback={<LoadingSpinner />}>
+          {renderPage()}
+        </Suspense>
       </main>
       <footer>
-        <p>&copy; 2025 Дешифратор для школьников. Все права защищены.</p>
+        <p>© 2026 Дешифратор для школьников. Все права защищены.</p>
       </footer>
     </div>
   );
