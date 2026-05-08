@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Optional, List
 
 # --- Схемы пользователя ---
 class UserCreate(BaseModel):
@@ -44,3 +45,28 @@ class ContactResponse(ContactCreate):
 
     class Config:
         from_attributes = True
+
+# --- Схемы заданий ---
+class TaskResponse(BaseModel):
+    id: int
+    cipher_type: str
+    order: int
+    text: str
+    hint: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class TaskAnswerSubmit(BaseModel):
+    task_id: int
+    answer: str
+
+class TaskAnswerResult(BaseModel):
+    correct: bool
+    message: str
+
+class UserProgressResponse(BaseModel):
+    cipher_type: str
+    total_tasks: int
+    completed_tasks: int
+    completed_task_ids: List[int]

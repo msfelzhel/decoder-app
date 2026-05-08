@@ -1,13 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-<<<<<<< HEAD
-from app.database import engine, Base
-from app.api import auth, history, contacts
-=======
 from .database import engine, Base
-from .api import auth, history, contacts
+from .api import auth, history, contacts, tasks
 
->>>>>>> 03e36dcb603423cf86dd2403eeb2c0b33c242971
 
 # Создание всех таблиц в БД
 Base.metadata.create_all(bind=engine)
@@ -27,3 +22,4 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(history.router)
 app.include_router(contacts.router)
+app.include_router(tasks.router)

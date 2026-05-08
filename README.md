@@ -85,13 +85,3 @@ docker run -d -p 3000:80 --name decoder-frontend decoder-app-frontend
 
 # Open in browser
 # http://localhost:3000/decoder-app/
-
-## 🐳 Docker for Full Stack (Frontend + Backend + Database)
-
-### Run everything with one command
-
-```bash
-# Build the image and run 
-docker-compose up --build
-# Stop containers
-docker-compose down

@@ -825,3 +825,602 @@ footer {
   }
 }
 
+
+
+/* ══════════════════════════════════
+   ЗАДАНИЯ — МАСКОТ ОВЕРЛЕЙ
+══════════════════════════════════ */
+.mascot-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44,26,14,0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: mascotFadeIn 0.3s ease;
+}
+
+@keyframes mascotFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mascot-dialog {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 24px;
+  gap: 24px;
+}
+
+.mascot-bubble {
+  position: relative;
+  background: #fff;
+  border-radius: 22px;
+  padding: 24px 28px 20px;
+  box-shadow: 0 8px 40px rgba(44,26,14,0.22);
+  width: 34vw;
+  max-width: 340px;
+  min-width: 220px;
+  flex-shrink: 0;
+  margin-bottom: 28vh;
+  animation: bubbleIn 0.4s 0.1s cubic-bezier(.34,1.56,.64,1) both;
+  z-index: 2;
+}
+
+@keyframes bubbleIn {
+  from { transform: scale(0.85) translateX(-20px); opacity: 0; }
+  to { transform: scale(1) translateX(0); opacity: 1; }
+}
+
+.mascot-bubble::after {
+  content: '';
+  position: absolute;
+  right: -18px;
+  bottom: 24px;
+  border: 10px solid transparent;
+  border-left-color: #fff;
+  border-right: none;
+}
+
+.mascot-bubble p {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2C1A0E;
+  line-height: 1.65;
+}
+
+.mascot-hint {
+  font-size: 0.83rem;
+  font-style: italic;
+  color: #7A7A7A;
+  margin-top: 10px;
+  display: block;
+  border-left: 3px solid #F5A623;
+  padding-left: 12px;
+  line-height: 1.55;
+}
+
+.bubble-next {
+  margin-top: 16px;
+  background: #E8720C;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 30px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.bubble-next:hover {
+  background: #cf6409;
+}
+
+.mascot-img {
+  height: 80vh;
+  width: auto;
+  flex-shrink: 0;
+  margin-bottom: -6vh;
+  filter: drop-shadow(0 0 40px rgba(232,114,12,0.18));
+  animation: foxIn 0.45s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes foxIn {
+  from { transform: translateX(60px) scale(0.85); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+/* ══════════════════════════════════
+   ЗАДАНИЯ — МЕНЮ ШИФРОВ
+══════════════════════════════════ */
+.tasks-menu-container {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.tasks-menu-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.tasks-menu-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.tasks-menu-header p {
+  color: #7A7A7A;
+  margin-top: 6px;
+  font-size: 1rem;
+}
+
+.tasks-ciphers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tasks-cipher-card {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(74,55,40,0.10);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.tasks-cipher-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.tasks-cipher-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tasks-cipher-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tasks-cipher-num {
+  width: 34px;
+  height: 34px;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.tasks-cipher-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.tasks-cipher-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.tasks-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.tasks-cipher-chapters {
+  border-top: 1px solid #F0EAE2;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tasks-chapter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FAF7F2;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: var(--dark);
+  transition: background 0.15s;
+  text-align: left;
+  width: 100%;
+}
+
+.tasks-chapter-btn:hover {
+  background: #F0EAE2;
+}
+
+.tasks-ch-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tasks-chapter-icon {
+  font-size: 1.1rem;
+}
+
+/* ══════════════════════════════════
+   ЗАДАНИЯ — ЭКРАН ГЛАВЫ
+══════════════════════════════════ */
+.tasks-chapter-topbar {
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #F0EAE2;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tasks-back-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--dark);
+  padding: 2px 6px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.tasks-back-btn:hover {
+  background: #F0EAE2;
+}
+
+.tasks-topbar-info {
+  flex: 1;
+}
+
+.tasks-topbar-cipher {
+  font-size: 0.8rem;
+  color: #7A7A7A;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tasks-topbar-chapter {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.tasks-chapter-content {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 16px 100px;
+}
+
+.tasks-content-card {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(74,55,40,0.10);
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tasks-content-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tasks-content-card h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 14px;
+}
+
+.tasks-content-card p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.tasks-history-note {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #7A7A7A;
+  border-left: 3px solid #F5A623;
+  padding-left: 14px;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════
+   ЗАДАНИЯ — ПОЛЕ ВВОДА И ПРОВЕРКА
+══════════════════════════════════ */
+.tasks-task-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #E8720C;
+  margin-bottom: 8px;
+}
+
+.tasks-task-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+
+.tasks-task-input {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  border: 2px solid #E0D8D0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  background: #FAF7F2;
+  color: var(--dark);
+  text-transform: uppercase;
+}
+
+.tasks-task-input:focus {
+  border-color: #E8720C;
+}
+
+.tasks-task-input.correct {
+  border-color: #4CAF50;
+  background: #F1FBF1;
+}
+
+.tasks-task-input.wrong {
+  border-color: #E53935;
+  background: #FFF1F1;
+}
+
+.tasks-check-btn {
+  margin-top: 14px;
+  background: #E8720C;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 36px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tasks-check-btn:hover {
+  background: #cf6409;
+}
+
+.tasks-feedback {
+  margin-top: 12px;
+  font-size: 0.97rem;
+  font-weight: 600;
+  min-height: 22px;
+}
+
+.tasks-feedback.ok {
+  color: #4CAF50;
+}
+
+.tasks-feedback.err {
+  color: #E53935;
+}
+
+.tasks-next-btn {
+  margin-top: 24px;
+  background: var(--dark);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 44px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tasks-next-btn:hover {
+  background: #6b5040;
+}
+
+/* Кнопка подсказки в углу */
+.tasks-hint-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 68px;
+  height: 68px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(44,26,14,0.18);
+  cursor: pointer;
+  padding: 6px;
+  z-index: 50;
+  transition: transform 0.2s;
+}
+
+.tasks-hint-btn:hover {
+  transform: scale(1.1);
+}
+
+.tasks-hint-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* ══════════════════════════════════
+   ЗАДАНИЯ — СПРАВОЧНЫЕ ТАБЛИЦЫ
+══════════════════════════════════ */
+.task-ref-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 12px;
+  border-radius: 8px;
+}
+
+.task-ref-title {
+  font-weight: 700;
+  margin: 14px 0 6px;
+  color: var(--dark);
+}
+
+.task-ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  min-width: 400px;
+}
+
+.task-ref-table td,
+.task-ref-table th {
+  border: 1px solid #F0EAE2;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.task-ref-table th {
+  background: #FFF3E8;
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ══════════════════════════════════
+   ЗАДАНИЯ — ФИНАЛЬНЫЙ ЭКРАН
+══════════════════════════════════ */
+.tasks-final {
+  text-align: center;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.tasks-final-fox {
+  width: 180px;
+  filter: drop-shadow(0 8px 24px rgba(232,114,12,0.20));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.tasks-final h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.tasks-final p {
+  color: #7A7A7A;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+/* Мобильная адаптация маскота */
+@media (max-width: 768px) {
+  .mascot-dialog {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 0 16px 24px;
+  }
+
+  .mascot-bubble {
+    width: 90vw;
+    max-width: none;
+    margin-bottom: 0;
+  }
+
+  .mascot-bubble::after {
+    display: none;
+  }
+
+  .mascot-img {
+    height: 40vh;
+    margin-bottom: 0;
+  }
+
+  .tasks-content-card {
+    padding: 20px;
+  }
+}
+
+
+.error-alert {
+  display: flex;
+  align-items: center;
+  background-color: #fff5f5; /* Очень светлый красный */
+  border: 1px solid #feb2b2;
+  color: #c53030;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-icon {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.error-message {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Дополнительно для полей ввода при ошибке (опционально) */
+input:disabled {
+  background-color: #f7fafc;
+  cursor: not-allowed;
+}

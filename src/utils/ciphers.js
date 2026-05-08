@@ -147,6 +147,7 @@ export const morseDecode = (morseCode) => {
 
   return result.trim();
 };
+
 // =====================
 // Шифр Виженера
 // =====================
@@ -212,8 +213,6 @@ export const vigenereDecrypt = (text, key) => {
   return result;
 };
 
-
-
 // =====================
 // Шифр Вернама
 // =====================
@@ -232,23 +231,62 @@ export const vernamCipher = (text, key) => {
 
   return result;
 };
-export const saveHistory = (type, input, result) => {
 
-  const history = JSON.parse(localStorage.getItem("cipherHistory")) || [];
+// =====================
+// Сохранение Истории
+// =====================
 
-  history.push({
-    type,
-    input,
-    result
-  });
+export const saveHistory = async (type, input, result) => {
+  // Вспомогательная функция для локального сохранения (фоллбек)
+  const saveLocally = () => {
+    try {
+      const history = JSON.parse(localStorage.getItem("cipherHistory")) || [];
+      history.push({ type, input, result });
+      
+      if (history.length > 20) {
+        history.shift();
+      }
+      
+      localStorage.setItem("cipherHistory", JSON.stringify(history));
+    } catch (e) {
+      console.error("Ошибка localStorage:", e);
+    }
+  };
 
-  if (history.length > 20) {
-    history.shift();
+  const user = localStorage.getItem("user");
+
+  // Если пользователь не авторизован (нет имени) — просто сохраняем локально и выходим
+  if (!user) {
+    saveLocally();
+    return;
   }
 
-  localStorage.setItem("cipherHistory", JSON.stringify(history));
+  // Если авторизован — пробуем отправить на сервер
+  try {
+    const response = await fetch("http://95.165.155.223:8000/api/history/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: 'include', // ВАЖНО: прикрепляем HttpOnly куку с токеном
+      body: JSON.stringify({ type, input, result })
+    });
 
+    if (!response.ok) {
+      throw new Error("Ошибка сервера при сохранении истории");
+    }
+
+    // Сохраняем локально тоже, чтобы интерфейс (HistoryPanel) обновился сразу,
+    // не дожидаясь, пока мы скачаем историю с сервера отдельным запросом
+    saveLocally();
+
+  } catch (error) {
+    console.warn("Не удалось сохранить на сервер, используем локальное хранилище:", error.message);
+    // Срабатывает фоллбек, если нет интернета или бэкенд недоступен
+    saveLocally();
+  }
 };
+
 // =====================
 // Rail Fence Cipher
 // =====================

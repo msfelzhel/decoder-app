@@ -36,7 +36,7 @@ const MorseCipher = ({ onBack }) => {
       </div>
 
       <div className="two-column-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '40px' }}>
-        <div style={{ background: '#fcfeff', borderRadius: '12px', padding: '25px', border: '3px solid var(--border)' }}>
+        <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
           <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>Как это работает</h3>
           <p style={{ color: '#666', marginBottom: '12px', fontSize: '14px' }}>
             Буквы и цифры кодируются комбинациями точек (·) и тире (—).
@@ -57,7 +57,7 @@ const MorseCipher = ({ onBack }) => {
           </p>
         </div>
 
-        <div style={{ background: '#fcfeff', borderRadius: '12px', padding: '25px', border: '3px solid var(--border)' }}>
+        <div style={{ background: 'white', borderRadius: '12px', padding: '25px', border: '1px solid var(--border)' }}>
           <h3 style={{ color: 'var(--dark)', marginBottom: '15px', fontSize: '18px' }}>Попробуй сам</h3>
 
           <div className="form-group">
@@ -95,7 +95,7 @@ const MorseCipher = ({ onBack }) => {
             />
           </div>
 
-          <div style={{ display: 'flex', gap: '15px', marginTop: '20px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
             <button className="btn-primary" onClick={handleTransform} style={{ flex: '1' }}>
               {mode === 'encode' ? 'Преобразовать' : 'Расшифровать'}
             </button>
@@ -119,33 +119,22 @@ const MorseCipher = ({ onBack }) => {
         </div>
       </div>
 
-{/* Попробуй другие шифры */}
-<div style={{ maxWidth: '800px', margin: '0 auto' }}>
-  <div 
-    className="cipher-info"
-    style={{ 
-      marginBottom: '30px',
-      padding: '10px 24px',
-      textAlign: 'center'
-    }}
-  >
-    <h3 style={{ 
-      color: 'var(--dark)', 
-      marginBottom: '16px',
-      fontSize: '18px',
-      fontWeight: '600'
-    }}>
-      ⚡ Попробуй другие шифры
-    </h3>
-    <div className="cipher-navigation">
-      <button onClick={() => onBack('caesar')}>Шифр Цезаря</button>
-      <button onClick={() => onBack('atbash')}>Шифр Атбаш</button>
-      <button onClick={() => onBack('dancing')}>Пляшущие человечки</button>
-    </div>
-  </div>
-</div>
+      <div style={{ background: '#FFC107', borderRadius: '12px', padding: '20px', marginBottom: '30px' }}>
+        <strong style={{ color: 'var(--dark)' }}>Попробуй другие шифры</strong>
+        <div className="cipher-navigation" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px', marginTop: '15px' }}>
+          <button onClick={() => onBack('caesar')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Шифр Цезаря
+          </button>
+          <button onClick={() => onBack('atbash')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Шифр Атбаш
+          </button>
+          <button onClick={() => onBack('dancing')} style={{ background: 'white', border: 'none', padding: '15px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', color: 'var(--dark)' }}>
+            Пляшущие человечки
+          </button>
+        </div>
+      </div>
 
-      <button className="btn-secondary" onClick={() => onBack('home')} style={{ width: '100%', padding: '12px', marginTop: '10px' }}>
+      <button className="btn-secondary" onClick={() => onBack('home')} style={{ width: '100%', padding: '12px', marginTop: '20px' }}>
         ← Вернуться на главную
       </button>
     </div>
